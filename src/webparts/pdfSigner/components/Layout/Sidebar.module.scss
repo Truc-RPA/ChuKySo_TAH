@@ -1,0 +1,84 @@
+@import '~office-ui-fabric-react/dist/sass/References.scss';
+
+.sidebar {
+    width: 250px;
+    background-color: #003399;
+    /* Dark Blue from screenshot */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 600px;
+    /* height: 100vh; -- Removed */
+    flex-shrink: 0;
+    /* position: fixed; -- Removed */
+    /* left: 0; */
+    /* top: 0; */
+    /* z-index: 100; */
+    transition: width 0.3s;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+
+    .logoArea {
+        padding: 20px;
+        background-color: #002277;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        .logoText {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            margin: 0;
+        }
+
+        .logoSub {
+            font-size: 12px;
+            color: #aaa;
+        }
+    }
+
+    .menuList {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0;
+        flex-grow: 1;
+
+        .menuItem {
+            padding: 12px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background 0.2s;
+            color: rgba(255, 255, 255, 0.8);
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                color: white;
+            }
+
+            &.active {
+                background-color: rgba(255, 255, 255, 0.2);
+                color: white;
+                border-left: 4px solid #fff;
+            }
+
+            .menuIcon {
+                margin-right: 12px;
+                font-size: 18px;
+                width: 20px;
+                text-align: center;
+            }
+
+            .menuText {
+                font-size: 14px;
+                font-weight: 500;
+            }
+        }
+    }
+
+    .footer {
+        padding: 20px;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.4);
+        text-align: center;
+    }
+}

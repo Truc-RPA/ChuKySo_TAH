@@ -1,0 +1,27 @@
+# .gitignore for SharePoint Framework
+node_modules
+lib
+dist
+temp
+release
+release-assets
+teams
+.gcb
+.hk
+.yo-rc.json
+package-lock.json
+*.log
+*.njsproj
+*.sln
+*.suo
+*.ntvs*
+*.njsproj
+*.njsperf
+*.vsp
+.vscode
+.DS_Store
+npm-debug.log
+jspm_packages
+typings
+.idea
+*.sppkg

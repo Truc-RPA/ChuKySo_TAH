@@ -1,0 +1,39 @@
+import * as React from 'react';
+import styles from './MainApp.module.scss';
+import { Sidebar } from './Sidebar';
+import { Header } from './Header';
+import { WelcomeScreen } from '../Dashboard/WelcomeScreen';
+import PdfSignerComponent from '../PdfSignerComponent';
+import { IPdfSignerProps } from '../IPdfSignerProps';
+
+export interface IMainAppProps extends IPdfSignerProps {
+    userDisplayName: string;
+}
+
+export const MainApp: React.FunctionComponent<IMainAppProps> = (props) => {
+    const [currentView, setCurrentView] = React.useState('home');
+
+    const renderContent = () => {
+        switch (currentView) {
+            case 'home':
+                return <WelcomeScreen userDisplayName={props.userDisplayName} />;
+            case 'signature':
+                return <PdfSignerComponent {...props} />;
+            default:
+                // For other menu items, show a placeholder or the Welcome Screen for now
+                return <WelcomeScreen userDisplayName={props.userDisplayName} />;
+        }
+    };
+
+    return (
+        <div className={styles.mainApp}>
+            <Sidebar currentView={currentView} onNavigate={setCurrentView} />
+            <div className={styles.contentWrapper}>
+                <Header userDisplayName={props.userDisplayName} />
+                <div className={styles.mainContent}>
+                    {renderContent()}
+                </div>
+            </div>
+        </div>
+    );
+};

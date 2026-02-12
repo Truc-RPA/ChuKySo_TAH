@@ -1,0 +1,38 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+    "id": "f4217ab8-dea3-493e-bb45-6f560d122d01",
+    "alias": "PdfSignerWebPart",
+    "componentType": "WebPart",
+    "version": "*",
+    "manifestVersion": 2,
+    "requiresCustomScript": false,
+    "supportedHosts": [
+        "SharePointWebPart",
+        "TeamsPersonalApp",
+        "TeamsTab"
+    ],
+    "preconfiguredEntries": [
+        {
+            "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+            "group": {
+                "default": "Other"
+            },
+            "title": {
+                "default": "PDF Auto Signer"
+            },
+            "description": {
+                "default": "Tự động ký PDF bằng chữ ký lưu trong SharePoint"
+            },
+            "officeFabricIconFontName": "PDF",
+            "properties": {
+                "signatureLibraryName": "DigitalSignatures",
+                "approvalListName": "ApprovalList",
+                "signedOutputLibrary": "SignedPDF",
+                "signatureWidth": 100,
+                "signatureHeight": 50,
+                "autoFillDate": true,
+                "dateFormat": "dd/MM/yyyy"
+            }
+        }
+    ]
+}

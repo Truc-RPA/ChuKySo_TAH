@@ -1,0 +1,40 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+    "solution": {
+        "name": "pdf-signer-webpart-client-side-solution",
+        "id": "75b56526-8c3e-4c46-8de1-1c95f166718f",
+        "version": "1.0.0.0",
+        "includeClientSideAssets": true,
+        "skipFeatureDeployment": true,
+        "isDomainIsolated": false,
+        "developer": {
+            "name": "",
+            "websiteUrl": "",
+            "privacyUrl": "",
+            "termsOfUseUrl": "",
+            "mpnId": "Undefined-1.17.4"
+        },
+        "metadata": {
+            "shortDescription": {
+                "default": "PDF Auto Signer WebPart"
+            },
+            "longDescription": {
+                "default": "SPFx WebPart to automatically sign PDF documents using signatures stored in SharePoint"
+            },
+            "screenshotPaths": [],
+            "videoUrl": "",
+            "categories": []
+        },
+        "features": [
+            {
+                "title": "PDF Signer Feature",
+                "description": "Activates the PDF Signer WebPart",
+                "id": "581f2a64-a39d-4773-a17a-74222b400510",
+                "version": "1.0.0.0"
+            }
+        ]
+    },
+    "paths": {
+        "zippedPackage": "solution/pdf-signer-webpart.sppkg"
+    }
+}
