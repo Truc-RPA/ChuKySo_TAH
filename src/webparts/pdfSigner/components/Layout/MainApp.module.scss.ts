@@ -1,9 +1,9 @@
 /* tslint:disable */
 require("./MainApp.module.css");
 const styles = {
-  mainApp: 'mainApp_227efdf4',
-  contentWrapper: 'contentWrapper_227efdf4',
-  mainContent: 'mainContent_227efdf4'
+  mainApp: 'mainApp_59e4df12',
+  contentWrapper: 'contentWrapper_59e4df12',
+  mainContent: 'mainContent_59e4df12'
 };
 
 export default styles;
