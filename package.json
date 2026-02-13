@@ -19,13 +19,14 @@
     "@microsoft/sp-office-ui-fabric-core": "1.18.2",
     "@microsoft/sp-property-pane": "1.18.2",
     "@microsoft/sp-webpart-base": "1.18.2",
-    "@pnp/sp": "^3.21.0",
     "@pnp/logging": "^3.21.0",
     "@pnp/queryable": "^3.21.0",
+    "@pnp/sp": "^3.21.0",
+    "office-ui-fabric-react": "7.199.1",
     "pdf-lib": "^1.17.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "office-ui-fabric-react": "7.199.1",
+    "react-icons": "^4.12.0",
     "tslib": "2.3.1"
   },
   "devDependencies": {

@@ -42,6 +42,7 @@ export default class PdfSignerWebPart extends BaseClientSideWebPart<IPdfSignerWe
             MainApp,
             {
                 sp: this._sp,
+                context: this.context,
                 hasContext: !!this.context,
                 userDisplayName: this.context.pageContext.user.displayName,
                 signatureLibraryName: this.properties.signatureLibraryName,

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "f8fd1878-9fe7-494f-b891-186d74edeba4",
+  "alias": "VanBanBanHanhWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "supportsFullBleed": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "a7b4e92d-4f18-4c3a-b5e6-f321d8a6c4b7",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "VANBAN"
+      },
+      "description": {
+        "default": "VANBAN description"
+      },
+      "officeFabricIconFontName": "Page",
+      "properties": {
+        "description": "VANBAN",
+        "libraryName": "VANBAN",
+        "SearchTreeFolder": false,
+        "timeWaiting": 500
+      }
+    }
+  ]
+}

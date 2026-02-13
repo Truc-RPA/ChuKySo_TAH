@@ -1,0 +1,921 @@
+// Biến toàn cục (tùy chỉnh colors, sizes tại đây)
+$primary-color: #0078d4; // Blue chính
+$secondary-color: #6c757d;
+$success-color: #28a745;
+$danger-color: #dc3545;
+$warning-color: #fd7e14;
+$light-gray: #f8f9fa;
+$dark-gray: #343a40;
+$border-color: #dee2e6;
+$shadow-color: rgba(0, 0, 0, 0.1);
+$transition-speed: 0.3s;
+$folder-icon-size: 18px;
+$chevron-icon-size: 14px;
+$border-radius: 5px;
+$box-shadow: 0 2px 5px $shadow-color;
+$modern-yellow: #FFD700;
+
+$base-font-size: 12px;
+$header-font-size: 14px;
+$description-font-size: 11px;
+$meta-font-size: 10px;
+$padding-base: clamp(6px, 1vw, 8px);
+$margin-base: clamp(8px, 1.2vw, 10px);
+
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+    background-color: $light-gray;
+    min-height: 90vh;
+    max-height: 90vh;
+    overflow-y: auto;
+    max-width: 100%;
+    width: 100%;
+    font-size: $base-font-size;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+}
+
+.libraryRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 100%;
+    gap: clamp(10px, 1.5vw, 15px);
+}
+
+.librarySelector {
+    flex: 0 0 auto; // Giữ kích thước cố định cho dropdown
+    position: relative; // Để position loading
+}
+
+.dropdownLoading {
+    position: absolute;
+    right: -30px; // Bên phải dropdown
+    top: 50%;
+    transform: translateY(-50%);
+    color: $secondary-color;
+    font-size: clamp(10px, 1vw, 12px);
+}
+
+.hyperLink {
+    color: $primary-color;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: clamp(12px, 1.1vw, 14px);
+    transition: color $transition-speed ease, text-decoration $transition-speed ease;
+
+    &:hover {
+        color: darken($primary-color, 10%);
+        text-decoration: underline;
+    }
+}
+
+.searchContainer {
+    position: relative;
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 100%;
+    background-color: #fff;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    transition: box-shadow $transition-speed ease;
+    display: flex;
+    align-items: center;
+
+    .searchIcon {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $secondary-color;
+        font-size: clamp(14px, 1.2vw, 16px);
+    }
+
+    .inputWrapper {
+        position: relative;
+        flex-grow: 1;
+    }
+
+    .searchInput {
+        width: 100%;
+        padding: clamp(6px, 1vw, 8px) clamp(25px, 3vw, 35px) clamp(6px, 1vw, 8px) clamp(35px, 3vw, 45px);
+        border: none;
+        border-radius: $border-radius;
+        font-size: clamp(12px, 1.1vw, 14px);
+        outline: none;
+        transition: box-shadow $transition-speed ease;
+
+        &:focus {
+            box-shadow: 0 0 5px rgba($primary-color, 0.3);
+        }
+
+        &:disabled {
+            background-color: $light-gray;
+            cursor: not-allowed;
+        }
+    }
+
+    .clearIcon {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $secondary-color;
+        font-size: clamp(14px, 1.2vw, 16px);
+        cursor: pointer;
+        transition: color $transition-speed ease;
+
+        &:hover {
+            color: $danger-color;
+        }
+    }
+
+    .loading {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $secondary-color;
+        font-size: clamp(10px, 1vw, 12px);
+    }
+}
+
+.contentBody {
+    display: flex;
+    gap: clamp(10px, 1.5vw, 15px);
+    flex-wrap: nowrap;
+    width: 100%;
+    height: calc(90vh - 110px); // Chiều cao cố định dựa trên màn hình
+    overflow: hidden; // Ngăn cuộn toàn bộ contentBody
+    flex-grow: 1;
+
+    .contentBodyInner {
+        display: flex;
+        width: 100%;
+        height: 100%; // Đảm bảo chiều cao 100% của contentBody
+        flex-direction: row;
+        align-items: stretch; // 🔥 ép 2 cột bằng chiều cao
+        gap: clamp(10px, 1.5vw, 15px);
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+            height: auto; // Cho phép tự điều chỉnh chiều cao trên mobile
+        }
+    }
+
+    .sidebar {
+        flex: 1 1 300px;
+        min-width: 250px;
+        max-width: 30%;
+        background-color: #fff;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        padding: clamp(8px, 1.2vw, 12px);
+        box-shadow: $box-shadow;
+        overflow-y: auto; // Cuộn độc lập cho sidebar
+        height: 100%; // Đảm bảo chiều cao 100% của contentBodyInner
+
+        .folderHeader {
+            display: flex;
+            align-items: center;
+            gap: clamp(4px, 0.8vw, 6px);
+            font-size: $header-font-size;
+            font-weight: 600;
+            margin-bottom: clamp(8px, 1.2vw, 10px);
+            color: $dark-gray;
+            transition: color $transition-speed ease;
+
+            &:hover {
+                color: lighten($dark-gray, 10%);
+            }
+
+            .folderIcon {
+                font-size: $folder-icon-size !important;
+                color: $modern-yellow;
+                width: $folder-icon-size !important;
+                height: $folder-icon-size !important;
+                min-width: $folder-icon-size !important;
+                flex-shrink: 0;
+                vertical-align: middle;
+                transition: transform $transition-speed ease, box-shadow $transition-speed ease;
+
+                &:hover {
+                    transform: scale(1.1);
+                    box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+                }
+            }
+        }
+
+        .folderList {
+            .folderWrapper {
+                .folderItem {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: clamp(5px, 0.8vw, 8px) clamp(6px, 1vw, 10px);
+                    cursor: pointer;
+                    border-radius: $border-radius;
+                    transition: background-color $transition-speed ease, transform $transition-speed ease;
+
+                    &:hover {
+                        background-color: $light-gray;
+                        transform: translateY(-1px);
+                    }
+
+                    &.selected {
+                        background-color: rgba($primary-color, 0.1);
+                        color: $primary-color;
+                        font-weight: 500;
+                    }
+
+                    .folderContent {
+                        display: flex;
+                        align-items: center;
+                        gap: clamp(3px, 0.6vw, 5px);
+                        flex: 1;
+                        min-width: 0;
+
+                        .folderIcon {
+                            font-size: $folder-icon-size !important;
+                            color: $modern-yellow;
+                            width: $folder-icon-size !important;
+                            height: $folder-icon-size !important;
+                            min-width: $folder-icon-size !important;
+                            flex-shrink: 0;
+                            vertical-align: middle;
+                            transition: transform $transition-speed ease;
+
+                            &:hover {
+                                transform: scale(1.1);
+                            }
+                        }
+
+                        .folderName {
+                            font-size: clamp(12px, 1.2vw, 14px);
+                            position: relative;
+                            flex: 1;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            min-width: 0;
+                            transition: color $transition-speed ease;
+
+                            &:hover {
+                                color: darken($dark-gray, 10%);
+                            }
+                        }
+                    }
+
+                    .chevron {
+                        display: flex;
+                        align-items: center;
+                        font-size: $chevron-icon-size;
+                        color: $secondary-color;
+                        transition: transform $transition-speed ease;
+
+                        svg {
+                            margin-left: clamp(3px, 0.6vw, 5px);
+                        }
+
+                        &:hover {
+                            transform: rotate(90deg);
+                        }
+                    }
+                }
+
+                .subFolderList {
+                    margin-left: clamp(10px, 1.5vw, 15px);
+                }
+            }
+        }
+    }
+
+    .fileList {
+        flex: 2 1 600px;
+        min-width: 300px;
+        max-width: 70%;
+        background-color: #fff;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        padding: clamp(8px, 1.2vw, 12px);
+        box-shadow: $box-shadow;
+        overflow-y: auto; // Cuộn nội dung bên trong
+        max-height: calc(90vh - 110px); // Chiều cao cố định dựa trên màn hình
+        height: 100%; // Đảm bảo lấp đầy chiều cao của contentBodyInner
+
+        .fileHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: clamp(8px, 1.2vw, 10px);
+            transition: background-color $transition-speed ease;
+
+            &:hover {
+                background-color: rgba($light-gray, 0.5);
+            }
+
+            h3 {
+                font-size: $header-font-size;
+                font-weight: 600;
+                color: $dark-gray;
+                transition: color $transition-speed ease;
+
+                &:hover {
+                    color: lighten($dark-gray, 10%);
+                }
+            }
+
+            .sortButton {
+                background: none;
+                border: none;
+                cursor: pointer;
+                font-size: clamp(16px, 1.3vw, 18px);
+                color: $secondary-color;
+                transition: transform $transition-speed ease, color $transition-speed ease;
+
+                &:hover {
+                    color: $primary-color;
+                    transform: scale(1.1);
+                }
+
+                &:disabled {
+                    color: $border-color;
+                    cursor: not-allowed;
+                }
+            }
+        }
+
+        .documentItem {
+            display: flex;
+            flex-direction: column;
+            gap: $padding-base;
+            padding: $padding-base;
+            border-bottom: 1px solid $border-color;
+            background-color: #fff;
+            border-radius: $border-radius;
+            box-shadow: $box-shadow;
+            transition: transform $transition-speed ease;
+            cursor: pointer;
+            max-width: 100%;
+
+            &:hover {
+                transform: translateY(-2px);
+            }
+
+            .fileHeader {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: $padding-base 0;
+                width: 100%;
+
+                .fileType {
+                    font-size: clamp(24px, 2.5vw, 30px);
+                    display: flex;
+                    align-items: center;
+                    margin-right: $margin-base;
+                    flex-shrink: 0;
+
+                    svg {
+                        color: $primary-color;
+                    }
+                }
+
+                .fileTitle {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    overflow: hidden;
+
+                    .fileTitleRow {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin: 0;
+                        width: 100%;
+
+                        .fileName {
+                            font-size: clamp(14px, 1.5vw, 16px);
+                            font-weight: 600;
+                            color: $dark-gray;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            max-width: 70%; // Đảm bảo có đủ chỗ cho status
+                        }
+
+                        .status {
+                            background-color: $success-color;
+                            color: #fff;
+                            padding: clamp(2px, 0.4vw, 4px) clamp(8px, 1vw, 10px);
+                            border-radius: $border-radius;
+                            font-size: $meta-font-size;
+                            white-space: nowrap;
+                            flex-shrink: 0;
+                            margin-left: $margin-base; // Khoảng cách từ tên file
+                        }
+                    }
+
+                    .views {
+                        display: flex;
+                        align-items: center;
+                        gap: $padding-base;
+                        font-size: $meta-font-size;
+                        color: $secondary-color;
+                        margin-top: 2px; // Đưa xuống dưới tiêu đề
+
+                        svg {
+                            font-size: clamp(14px, 1.5vw, 16px);
+                            color: $primary-color;
+                        }
+                    }
+                }
+
+                .views {
+                    display: none; // Ẩn views ở đây vì đã di chuyển vào fileTitle
+                }
+            }
+
+            .fileMeta {
+                display: flex;
+                flex-direction: column;
+                gap: $padding-base;
+                width: 100%;
+
+                .metaItem {
+                    display: flex;
+                    align-items: center;
+                    gap: $padding-base;
+                    font-size: $meta-font-size;
+                    color: $secondary-color;
+                    width: 100%;
+                    overflow: hidden;
+
+                    .metaIcon {
+                        font-size: clamp(14px, 1.5vw, 16px);
+                        color: $primary-color;
+                        flex-shrink: 0;
+                    }
+
+                    strong {
+                        margin-right: $padding-base;
+                        color: $dark-gray;
+                        font-weight: 500;
+                        flex-shrink: 0;
+                    }
+
+                    span {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        flex-grow: 1;
+                    }
+                }
+            }
+
+            .fileContent {
+                display: flex;
+                flex-direction: column;
+                gap: $padding-base;
+                width: 100%;
+            }
+
+            .fileTitleRow {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 0;
+                width: 100%;
+            }
+        }
+
+        .backButton {
+            margin-bottom: 10px;
+            padding: 4px 12px;
+            background-color: #f0f0f0;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            border-radius: 16px;
+            width: fit-content;
+
+            &:hover {
+                background-color: #e0e0e0;
+            }
+        }
+    }
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(5px, 0.8vw, 8px);
+    margin-top: clamp(10px, 1.5vw, 15px);
+    font-size: $meta-font-size;
+    width: 100%;
+
+    button {
+        padding: clamp(4px, 0.6vw, 6px) clamp(8px, 1vw, 10px);
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        background-color: #fff;
+        cursor: pointer;
+        transition: background-color $transition-speed ease, transform $transition-speed ease;
+
+        &:hover:not(:disabled) {
+            background-color: $light-gray;
+            transform: translateY(-1px);
+        }
+
+        &:disabled {
+            background-color: $border-color;
+            cursor: not-allowed;
+            color: $secondary-color;
+            opacity: 0.6;
+        }
+    }
+
+    span {
+        font-size: $meta-font-size;
+        color: $dark-gray;
+        transition: color $transition-speed ease;
+
+        &:hover {
+            color: lighten($dark-gray, 10%);
+        }
+    }
+}
+
+.iconFolders {
+    font-size: $folder-icon-size !important;
+    color: $modern-yellow;
+    width: $folder-icon-size !important;
+    height: $folder-icon-size !important;
+    min-width: $folder-icon-size !important;
+    flex-shrink: 0;
+    vertical-align: middle;
+    transition: transform $transition-speed ease, box-shadow $transition-speed ease;
+
+    &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+    }
+}
+
+.errorMessage {
+    color: $danger-color;
+    font-size: clamp(12px, 1.2vw, 14px);
+    text-align: center;
+    padding: clamp(12px, 1.5vw, 15px);
+    transition: opacity $transition-speed ease;
+
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+.loadingContainer {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+@media (max-width: 1024px) {
+    .contentBody {
+        .sidebar {
+            flex: 1 1 250px;
+            max-width: 35%;
+        }
+
+        .fileList {
+            flex: 2 1 450px;
+            max-width: 65%;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+        min-height: 70vh;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .contentBody {
+        .contentBodyInner {
+            flex-direction: column;
+            height: auto; // Cho phép tự điều chỉnh chiều cao trên mobile
+        }
+
+        .sidebar,
+        .fileList {
+            flex: 1 1 100%;
+            min-width: 200px;
+            margin-bottom: 10px;
+            padding: clamp(6px, 1vw, 8px);
+            max-width: 100%;
+            height: auto; // Tự điều chỉnh chiều cao trên mobile
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .fileTitleRow,
+    .fileMeta {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .status,
+        .views,
+        .metaItem {
+            margin-top: 4px;
+            text-align: left;
+            max-width: 100%;
+        }
+    }
+
+    .libraryRow {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 8px;
+        min-height: 70vh;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .contentBody {
+
+        .sidebar,
+        .fileList {
+            flex: 1 1 100%;
+            min-width: 150px;
+            max-width: 100%;
+            height: auto;
+        }
+    }
+
+    .searchContainer {
+        .searchInput {
+            padding: clamp(5px, 0.8vw, 6px) clamp(20px, 2.5vw, 25px);
+            font-size: clamp(10px, 0.9vw, 12px);
+        }
+    }
+
+    .fileList {
+        .documentItem {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+            max-width: 100%;
+
+            .fileType {
+                width: 25px;
+                height: 25px;
+                font-size: 20px;
+            }
+
+            .fileContent {
+                width: 100%;
+            }
+
+            .fileMeta {
+                flex-direction: column;
+                align-items: flex-start;
+
+                .metaItem {
+                    text-align: left;
+                    margin-top: 2px;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+.container {
+    padding: 10px; // Giảm padding tổng thể
+}
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px; // Giảm khoảng cách giữa các phần tử trong search
+    padding: 10px; // Giảm padding
+    background-color: #f8f9fa;
+    border-radius: 6px; // Giảm bo góc
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); // Giảm bóng đổ
+    margin-bottom: 10px; // Giảm khoảng cách với contentBody
+}
+
+.searchIcon {
+    font-size: 18px; // Điều chỉnh kích thước icon
+    color: #495057;
+    display: flex;
+    align-items: center;
+}
+
+.inputWrapper {
+    flex-grow: 1;
+    position: relative;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 8px 35px 8px 10px; // Giảm padding
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+
+    &:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+    }
+
+    &:disabled {
+        background-color: #e9ecef;
+        cursor: not-allowed;
+    }
+}
+
+.clearIcon {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px; // Giảm kích thước nút xóa
+    color: #6c757d;
+    cursor: pointer;
+    transition: color 0.3s;
+
+    &:hover {
+        color: #dc3545;
+    }
+}
+
+.searchButton {
+    padding: 8px 16px; // Giảm padding
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover:not(:disabled) {
+        background-color: #0056b3;
+    }
+
+    &:disabled {
+        background-color: #6c757d;
+        cursor: not-allowed;
+    }
+}
+
+.loadingSpinner {
+    display: flex;
+    align-items: center;
+    margin-left: 8px; // Giảm khoảng cách
+}
+
+.spinner {
+    width: 16px; // Giảm kích thước spinner
+    height: 16px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.contentBody {
+    display: flex;
+    gap: 15px; // Khoảng cách giữa sidebar và fileList
+}
+
+.contentBodyInner {
+    flex: 1;
+    display: flex;
+    gap: 15px; // Đảm bảo khoảng cách đồng đều
+}
+
+.sidebar {
+    width: 250px; // Đặt độ rộng cố định cho sidebar
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.folderHeader {
+    margin-bottom: 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.folderIcon {
+    font-size: 16px;
+}
+
+.folderList {
+    margin-top: 5px;
+}
+
+.fileList {
+    flex: 1;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.fileHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.sortButton {
+    padding: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #007bff;
+
+    &:disabled {
+        color: #6c757d;
+        cursor: not-allowed;
+    }
+}
+
+.documentItem {
+    padding: 10px;
+    margin-bottom: 5px; // Giảm khoảng cách giữa các item
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: #e9ecef;
+    }
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.backButton {
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #5a6268;
+    }
+}
+
+.loadingContainer {
+    text-align: center;
+    padding: 20px;
+}

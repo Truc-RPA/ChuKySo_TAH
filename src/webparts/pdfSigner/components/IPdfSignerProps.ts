@@ -1,3 +1,4 @@
+import { WebPartContext } from '@microsoft/sp-webpart-base';
 import { SPFI } from '@pnp/sp';
 import { ISignaturePosition } from '../services/PdfService';
 
@@ -5,6 +6,8 @@ import { ISignaturePosition } from '../services/PdfService';
  * Props cho PdfSignerComponent
  */
 export interface IPdfSignerProps {
+    /** KEY: WebPartContext để truy cập pageContext */
+    context: WebPartContext;
     /** PnPjs SP instance */
     sp: SPFI;
     /** Tên Document Library chứa chữ ký */

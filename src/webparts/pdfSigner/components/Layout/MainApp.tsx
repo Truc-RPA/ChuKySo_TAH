@@ -22,7 +22,7 @@ export const MainApp: React.FunctionComponent<IMainAppProps> = (props) => {
             case 'signature':
                 return <PdfSignerComponent {...props} />;
             case 'phathanh':
-                return <IssuedDocuments sp={props.sp} />;
+                return <IssuedDocuments sp={props.sp} context={props.context} />;
             default:
                 // For other menu items, show a placeholder or the Welcome Screen for now
                 return <WelcomeScreen userDisplayName={props.userDisplayName} />;
