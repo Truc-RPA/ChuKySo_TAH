@@ -22,10 +22,14 @@ export interface IPdfSignerWebPartProps {
     signatureHeight: number;
     autoFillDate: boolean;
     dateFormat: string;
+    // Menu URLs
+    menuUrl_home: string;
+    menuUrl_quanly: string;
+    menuUrl_phathanh: string;
+    menuUrl_files: string;
 }
 
 export default class PdfSignerWebPart extends BaseClientSideWebPart<IPdfSignerWebPartProps> {
-
     private _sp: any;
 
     public async onInit(): Promise<void> {
@@ -46,20 +50,21 @@ export default class PdfSignerWebPart extends BaseClientSideWebPart<IPdfSignerWe
                 signatureWidth: this.properties.signatureWidth,
                 signatureHeight: this.properties.signatureHeight,
                 autoFillDate: this.properties.autoFillDate,
-                dateFormat: this.properties.dateFormat
+                dateFormat: this.properties.dateFormat,
+                // Pass menu URLs
+                menuUrls: {
+                    'home': this.properties.menuUrl_home,
+                    'quanly': this.properties.menuUrl_quanly,
+                    'phathanh': this.properties.menuUrl_phathanh,
+                    'files': this.properties.menuUrl_files
+                }
             }
         );
 
         ReactDom.render(element, this.domElement);
     }
 
-    protected onDispose(): void {
-        ReactDom.unmountComponentAtNode(this.domElement);
-    }
-
-    protected get dataVersion(): Version {
-        return Version.parse('1.0');
-    }
+    // ... (onDispose, dataVersion unchanged)
 
     protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
         return {
@@ -83,6 +88,23 @@ export default class PdfSignerWebPart extends BaseClientSideWebPart<IPdfSignerWe
                                 }),
                                 PropertyPaneTextField('dateFormat', {
                                     label: strings.DateFormatLabel
+                                })
+                            ]
+                        },
+                        {
+                            groupName: "Cấu hình Menu Navigation",
+                            groupFields: [
+                                PropertyPaneTextField('menuUrl_home', {
+                                    label: 'URL: Trang chủ'
+                                }),
+                                PropertyPaneTextField('menuUrl_quanly', {
+                                    label: 'URL: Quản lý văn bản'
+                                }),
+                                PropertyPaneTextField('menuUrl_phathanh', {
+                                    label: 'URL: Văn bản phát hành'
+                                }),
+                                PropertyPaneTextField('menuUrl_files', {
+                                    label: 'URL: Danh sách file'
                                 })
                             ]
                         }

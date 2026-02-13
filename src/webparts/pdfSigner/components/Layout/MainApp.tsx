@@ -8,6 +8,7 @@ import { IPdfSignerProps } from '../IPdfSignerProps';
 
 export interface IMainAppProps extends IPdfSignerProps {
     userDisplayName: string;
+    menuUrls?: { [key: string]: string };
 }
 
 export const MainApp: React.FunctionComponent<IMainAppProps> = (props) => {
@@ -27,7 +28,7 @@ export const MainApp: React.FunctionComponent<IMainAppProps> = (props) => {
 
     return (
         <div className={styles.mainApp}>
-            <Sidebar currentView={currentView} onNavigate={setCurrentView} />
+            <Sidebar currentView={currentView} onNavigate={setCurrentView} menuUrls={props.menuUrls} />
             <div className={styles.contentWrapper}>
                 <Header userDisplayName={props.userDisplayName} />
                 <div className={styles.mainContent}>

@@ -5,6 +5,7 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon';
 export interface ISidebarProps {
     currentView: string;
     onNavigate: (view: string) => void;
+    menuUrls?: { [key: string]: string };
 }
 
 export const Sidebar: React.FunctionComponent<ISidebarProps> = (props) => {
@@ -15,6 +16,16 @@ export const Sidebar: React.FunctionComponent<ISidebarProps> = (props) => {
         { key: 'files', label: 'Danh sách file', icon: 'FolderOpen' },
         { key: 'signature', label: 'Chữ ký', icon: 'PenWorkspace' }, // This is our WebPart
     ];
+
+    const handleItemClick = (key: string) => {
+        // Nếu có URL cấu hình cho menu này, navigate ngay
+        if (props.menuUrls && props.menuUrls[key]) {
+            window.location.href = props.menuUrls[key];
+            return;
+        }
+        // Ngược lại thì chuyển view nội bộ
+        props.onNavigate(key);
+    };
 
     return (
         <div className={styles.sidebar}>
@@ -43,7 +54,7 @@ export const Sidebar: React.FunctionComponent<ISidebarProps> = (props) => {
                     <li
                         key={item.key}
                         className={`${styles.menuItem} ${props.currentView === item.key ? styles.active : ''}`}
-                        onClick={() => props.onNavigate(item.key)}
+                        onClick={() => handleItemClick(item.key)}
                     >
                         <Icon iconName={item.icon} className={styles.menuIcon} />
                         <span className={styles.menuText}>{item.label}</span>
@@ -52,7 +63,7 @@ export const Sidebar: React.FunctionComponent<ISidebarProps> = (props) => {
             </ul>
 
             <div className={styles.footer}>
-                v1.0.0
+                v1.1.0
             </div>
         </div>
     );
