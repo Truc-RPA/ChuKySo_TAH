@@ -411,17 +411,17 @@
 
     footer {
         margin-top: auto;
-        padding: 2.5rem 0;
+        padding: 1.5rem 0;
+        background: #fff;
         border-top: 1px solid $border-color;
-        background: white;
 
         .footerContent {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2.5rem;
+            padding: 0 1rem; // Match container padding
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1rem;
 
             @media (min-width: 768px) {
                 flex-direction: row;
@@ -432,26 +432,36 @@
             .copyright {
                 display: flex;
                 align-items: center;
-                gap: 1rem;
-                color: #94a3b8; // slate-400
+                gap: 0.75rem;
+                color: $text-muted;
+
+                svg {
+                    width: 24px;
+                    height: 24px;
+                    color: $primary; // Highlight icon
+                }
 
                 p {
                     font-size: 0.875rem;
+                    font-weight: 500;
                     margin: 0;
                 }
             }
 
             .links {
                 display: flex;
-                gap: 2rem;
+                gap: 1.5rem;
+                flex-wrap: wrap; // Prevent overflow on small screens
 
                 a {
-                    color: #64748b; // slate-500
+                    color: $text-muted;
                     font-size: 0.875rem;
                     text-decoration: none;
+                    transition: color 0.2s;
 
                     &:hover {
                         color: $primary;
+                        text-decoration: underline;
                     }
                 }
             }
