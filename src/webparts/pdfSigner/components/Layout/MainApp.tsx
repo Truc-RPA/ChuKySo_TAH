@@ -3,6 +3,7 @@ import styles from './MainApp.module.scss';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { WelcomeScreen } from '../Dashboard/WelcomeScreen';
+import { IssuedDocuments } from '../Dashboard/IssuedDocuments';
 import PdfSignerComponent from '../PdfSignerComponent';
 import { IPdfSignerProps } from '../IPdfSignerProps';
 
@@ -20,6 +21,8 @@ export const MainApp: React.FunctionComponent<IMainAppProps> = (props) => {
                 return <WelcomeScreen userDisplayName={props.userDisplayName} />;
             case 'signature':
                 return <PdfSignerComponent {...props} />;
+            case 'phathanh':
+                return <IssuedDocuments sp={props.sp} />;
             default:
                 // For other menu items, show a placeholder or the Welcome Screen for now
                 return <WelcomeScreen userDisplayName={props.userDisplayName} />;
