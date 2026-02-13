@@ -20,7 +20,11 @@ export const Sidebar: React.FunctionComponent<ISidebarProps> = (props) => {
     const handleItemClick = (key: string) => {
         // Nếu có URL cấu hình cho menu này, navigate ngay
         if (props.menuUrls && props.menuUrls[key]) {
-            window.location.href = props.menuUrls[key];
+            if (key === 'quanly') {
+                window.open(props.menuUrls[key], '_blank');
+            } else {
+                window.location.href = props.menuUrls[key];
+            }
             return;
         }
         // Ngược lại thì chuyển view nội bộ
