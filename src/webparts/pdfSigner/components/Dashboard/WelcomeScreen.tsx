@@ -1,8 +1,6 @@
 import * as React from 'react';
 import styles from './WelcomeScreen.module.scss';
 import {
-    MdSearch,
-    MdNotifications,
     MdMail,
     MdPayments,
     MdSupportAgent,
@@ -18,49 +16,6 @@ export interface IWelcomeScreenProps {
 export const WelcomeScreen: React.FunctionComponent<IWelcomeScreenProps> = (props) => {
     return (
         <div className={styles.welcomeScreen}>
-            {/* Header */}
-            <header>
-                <div className={styles.logoArea}>
-                    <div className={styles.brand}>
-                        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                            <g clipPath="url(#clip0_6_330)">
-                                <path clipRule="evenodd" d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill="currentColor" fillRule="evenodd"></path>
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_6_330"><rect fill="white" height="48" width="48"></rect></clipPath>
-                            </defs>
-                        </svg>
-                        <h2>Intranet Portal</h2>
-                    </div>
-                    <nav>
-                        <a href="#" className={styles.active}>Trang chủ</a>
-                        <a href="#">Khóa học</a>
-                        <a href="#">Sự kiện</a>
-                        <a href="#">Hoạt động</a>
-                        <a href="#">Tài liệu</a>
-                        <a href="#">Liên lạc</a>
-                    </nav>
-                </div>
-                <div className={styles.actionsArea}>
-                    <div className={styles.searchBar}>
-                        <div className={styles.inputGroup}>
-                            <div className={styles.icon}>
-                                <MdSearch />
-                            </div>
-                            <input type="text" placeholder="Tìm kiếm thông tin..." />
-                        </div>
-                    </div>
-                    <div className={styles.userProfile}>
-                        <MdNotifications />
-                        {/* Simple Avatar Placeholder */}
-                        <div className={styles.avatar}
-                            style={{ backgroundImage: `url("https://lh3.googleusercontent.com/aida-public/AB6AXuBCaVLGA5UxiqRx-p0X_JN4HO7TLp9jvJCnslTDkMsYnxmol2UWINb_C5I-R1BUH5Qp5-AbVYcJ8QewfZkRLFVX4Sp9_ES2KphFY-wPEQrFdZAaXkvgUzTl0AVmLJMqgYQfWsOK73FHv_2Q9ghdfnrJHbMLxqQ-GXAawHrHeN-hrbZHvNAHEt1z6SMX9cKwRTxJQDk914_gWxk1orVpfsfUiCDZs3sdLLBKUsr0V6gATcKONxY_tRx_aqDrT5viq_orr61i-4YzY-I")` }}
-                            title={props.userDisplayName}
-                        ></div>
-                    </div>
-                </div>
-            </header>
-
             <main>
                 <div className={styles.container}>
                     {/* Hero Section */}
