@@ -3,7 +3,7 @@
     "solution": {
         "name": "pdf-signer-webpart-client-side-solution",
         "id": "75b56526-8c3e-4c46-8de1-1c95f166718f",
-        "version": "1.0.0.0",
+        "version": "1.0.1.0",
         "includeClientSideAssets": true,
         "skipFeatureDeployment": true,
         "isDomainIsolated": false,

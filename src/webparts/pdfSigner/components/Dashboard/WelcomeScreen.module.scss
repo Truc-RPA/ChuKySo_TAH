@@ -3,7 +3,7 @@
 .welcomeScreen {
     font-family: 'Inter', sans-serif;
     background-color: #f6f7f8;
-    min-height: calc(100vh - 60px); // Adjust based on your main layout
+    // min-height removed to fix double scrollbar
     color: #0d141b;
 
     // Variables
